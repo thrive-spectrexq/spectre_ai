@@ -20,63 +20,54 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
     setLoading(true);
 
     try {
-      // Update the fetch URL to use the proxy '/api/v1/chat' endpoint
-      const response = await fetch('/api/v1/chat', {
+      const response = await fetch('http://localhost:5000/api/v1/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
           messages: [{ role: 'user', content: message }],
           model: 'gemini-pro',
+          apiKey: apiKey,
         }),
-      });      
-
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status} - ${response.statusText}`);
-      }
+      });
 
       const data = await response.json();
 
-      // Append the AI's response to the conversation
-      const botReply = data.reply || data.choices?.[0]?.message?.content || 'No response received';
-      setConversation((prev) => [...prev, { role: 'bot', content: botReply }]);
-    } catch (error) {
-      console.error('Error communicating with Google Gemini API:', error);
+      // Add the AI's response to the conversation
       setConversation((prev) => [
         ...prev,
-        { role: 'bot', content: 'Oops! Something went wrong. Please try again.' },
+        { role: 'ai', content: data.choices[0].message.content },
       ]);
+    } catch (error) {
+      console.error('Error communicating with the API:', error);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div>
-      <h1>Chat</h1>
-      <div style={{ marginBottom: '1rem', maxHeight: '400px', overflowY: 'auto' }}>
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
+      <div style={{ marginBottom: '20px' }}>
         {conversation.map((msg, index) => (
-          <div key={index} className={msg.role === 'user' ? 'user-msg' : 'bot-msg'}>
-            <strong>{msg.role === 'user' ? 'You: ' : 'Bot: '}</strong>
-            {msg.content}
+          <div key={index} style={{ marginBottom: '10px' }}>
+            <strong>{msg.role === 'user' ? 'You' : 'AI'}:</strong> {msg.content}
           </div>
         ))}
       </div>
-      <div>
-        <input
-          type="text"
-          placeholder="Ask me anything..."
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          disabled={loading}
-          style={{ marginRight: '10px', padding: '5px', width: '300px' }}
-        />
-        <button onClick={sendMessage} disabled={loading} style={{ padding: '5px 10px' }}>
-          {loading ? 'Sending...' : 'Send'}
-        </button>
-      </div>
+      <input
+        type="text"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        style={{ padding: '10px', fontSize: '1rem', width: '80%', marginRight: '10px' }}
+      />
+      <button
+        onClick={sendMessage}
+        disabled={loading}
+        style={{ padding: '10px 20px', fontSize: '1rem', borderRadius: '5px', border: 'none', backgroundColor: '#007BFF', color: '#fff', cursor: 'pointer' }}
+      >
+        {loading ? 'Sending...' : 'Send'}
+      </button>
     </div>
   );
 };

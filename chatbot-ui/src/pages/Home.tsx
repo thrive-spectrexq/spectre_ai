@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface HomeProps {
   setApiKey: (key: string) => void;
@@ -15,16 +17,27 @@ const Home: React.FC<HomeProps> = ({ setApiKey }) => {
     }
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKey(e.target.value);
+  };
+
   return (
-    <div>
-      <h1>Enter Your Google Gemini API Key</h1>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', fontFamily: 'Arial, sans-serif' }}>
+      <h1 style={{ marginBottom: '2rem', fontSize: '2.5rem', color: '#333' }}>Spectre AI</h1>
+      <h2 style={{ marginBottom: '1rem', fontSize: '1.5rem', color: '#555' }}>Enter Your Google Gemini API Key</h2>
       <input
         type="password"
-        placeholder="Google Gemini API Key"
+        onChange={handleChange}
         value={key}
-        onChange={(e) => setKey(e.target.value)}
+        style={{ padding: '10px', fontSize: '1rem', marginBottom: '1rem', width: '300px', borderRadius: '5px', border: '1px solid #ccc' }}
       />
-      <button onClick={handleSubmit}>Submit</button>
+      <button
+        onClick={handleSubmit}
+        style={{ padding: '10px 20px', fontSize: '1rem', borderRadius: '5px', border: 'none', backgroundColor: '#007BFF', color: '#fff', cursor: 'pointer' }}
+      >
+        Submit
+      </button>
+      <ToastContainer />
     </div>
   );
 };
