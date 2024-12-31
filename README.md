@@ -43,7 +43,7 @@ AI chatbot that implements a voice-assisted conversational AI `chat.py`. The scr
 `chat.py` is a CLI-based interactive assistant. To run the script:
 
 ```bash
-    python chat.py
+python chat.py
 ```
 
 ## Logging
