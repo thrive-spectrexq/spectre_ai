@@ -48,7 +48,7 @@ python chat.py
 
 ## Logging
 
-Both scripts are configured to log interactions and errors. Logs are written to the console and can be reviewed for debugging purposes.
+The chat.py script is configured to log interactions and errors. Logs are written to the console and can be reviewed for debugging purposes.
 
 ## Contributing
 

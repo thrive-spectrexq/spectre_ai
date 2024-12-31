@@ -1,3 +1,4 @@
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import React, { useState } from 'react';
 
 interface ChatProps {
@@ -20,24 +21,15 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
     setLoading(true);
 
     try {
-      const response = await fetch('/api/v1/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          messages: [{ role: 'user', content: message }],
-          model: 'gemini-pro',
-        }),
-      });
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
-      const data = await response.json();
+      const result = await model.generateContent(message);
 
       // Add the AI's response to the conversation
       setConversation((prev) => [
         ...prev,
-        { role: 'ai', content: data.choices[0].message.content },
+        { role: 'ai', content: result.response.text() },
       ]);
     } catch (error) {
       console.error('Error communicating with the API:', error);
