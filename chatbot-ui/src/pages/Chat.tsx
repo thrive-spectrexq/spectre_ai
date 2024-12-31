@@ -20,15 +20,15 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/v1/chat', {
+      const response = await fetch('/api/v1/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
           messages: [{ role: 'user', content: message }],
           model: 'gemini-pro',
-          apiKey: apiKey,
         }),
       });
 
