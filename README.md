@@ -42,9 +42,9 @@ AI chatbot that implements a voice-assisted conversational AI `chat.py`. The scr
 
 `chat.py` is a CLI-based interactive assistant. To run the script:
 
-```sh
+    ```sh
     python chat.py
-```
+    ```
 
 ## Logging
 
@@ -59,4 +59,3 @@ Contributions are welcome! Please submit a pull request or open an issue to disc
 These scripts are licensed under the [MIT License](LICENSE).
 
 ---
-
