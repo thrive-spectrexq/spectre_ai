@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Chat from './pages/Chat';
@@ -8,17 +9,18 @@ function App() {
   const [googleGeminiKey, setGoogleGeminiKey] = useState('');
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Navbar />
-      <div style={{ flex: 1 }}>
-        {googleGeminiKey ? (
-          <Chat apiKey={googleGeminiKey} />
-        ) : (
-          <Home setApiKey={setGoogleGeminiKey} />
-        )}
+    <Router>
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <Navbar />
+        <div style={{ flex: 1 }}>
+          <Routes>
+            <Route path="/" element={<Home setApiKey={setGoogleGeminiKey} />} />
+            <Route path="/chat" element={<Chat apiKey={googleGeminiKey} />} />
+          </Routes>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </Router>
   );
 }
 
