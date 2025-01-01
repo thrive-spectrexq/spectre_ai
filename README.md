@@ -2,7 +2,7 @@
 
 A webui AI chatbot that request for your google gemini api key and then answers your questions according your prompt.
 
-Access the webui from: [Spectre_AI](spectre-ai-pi.vercel.app)
+Access the webui from: [Spectre_AI](https://spectre-ai-pi.vercel.app)
 
 A python cli chatbot that implements a voice-assisted conversational AI `chat.py`. The script leverages various libraries and Google's Gemini Pro 1.5 to create an engaging and interactive user experience.
 

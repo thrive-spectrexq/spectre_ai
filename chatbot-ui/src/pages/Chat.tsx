@@ -9,7 +9,7 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
   const [message, setMessage] = useState('');
   const [conversation, setConversation] = useState<
     { role: string; content: string }[]
-  >([]);
+  >([{ role: 'ai', content: 'What can I help with?' }]);
   const [loading, setLoading] = useState(false);
 
   const sendMessage = async () => {
@@ -39,11 +39,13 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
   };
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif' }}>
-      <div style={{ marginBottom: '20px' }}>
+    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', maxWidth: '600px', margin: '0 auto' }}>
+      <div style={{ marginBottom: '20px', border: '1px solid #ccc', borderRadius: '5px', padding: '10px', backgroundColor: '#f9f9f9' }}>
         {conversation.map((msg, index) => (
-          <div key={index} style={{ marginBottom: '10px' }}>
-            <strong>{msg.role === 'user' ? 'You' : 'AI'}:</strong> {msg.content}
+          <div key={index} style={{ marginBottom: '10px', textAlign: msg.role === 'user' ? 'right' : 'left' }}>
+            <div style={{ display: 'inline-block', padding: '10px', borderRadius: '5px', backgroundColor: msg.role === 'user' ? '#007BFF' : '#e0e0e0', color: msg.role === 'user' ? '#fff' : '#000' }}>
+              <strong>{msg.role === 'user' ? 'You' : 'AI'}:</strong> {msg.content}
+            </div>
           </div>
         ))}
       </div>
@@ -51,7 +53,7 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
         type="text"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-        style={{ padding: '10px', fontSize: '1rem', width: '80%', marginRight: '10px' }}
+        style={{ padding: '10px', fontSize: '1rem', width: '80%', marginRight: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
       />
       <button
         onClick={sendMessage}
