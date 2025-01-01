@@ -11,7 +11,7 @@ function App() {
   return (
     <Router>
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <Navbar />
+        <Navbar googleGeminiKey={googleGeminiKey} />
         <div style={{ flex: 1 }}>
           <Routes>
             <Route path="/" element={<Home setApiKey={setGoogleGeminiKey} />} />

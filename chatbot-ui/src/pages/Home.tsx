@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -8,10 +9,12 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ setApiKey }) => {
   const [key, setKey] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     if (key.trim()) {
       setApiKey(key);
+      navigate('/chat'); // Redirect to chat page
     } else {
       alert('Please enter a valid API key.');
     }
