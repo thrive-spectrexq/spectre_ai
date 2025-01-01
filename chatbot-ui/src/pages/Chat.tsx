@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface ChatProps {
   apiKey: string;
@@ -11,6 +11,7 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
     { role: string; content: string }[]
   >([{ role: 'ai', content: 'What can I help with?' }]);
   const [loading, setLoading] = useState(false);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const sendMessage = async () => {
     if (!message.trim()) return;
@@ -38,9 +39,18 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
     }
   };
 
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [conversation]);
+
   return (
     <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', maxWidth: '600px', margin: '0 auto' }}>
-      <div style={{ marginBottom: '20px', border: '1px solid #ccc', borderRadius: '5px', padding: '10px', backgroundColor: '#f9f9f9' }}>
+      <div
+        ref={chatContainerRef}
+        style={{ marginBottom: '20px', border: '1px solid #ccc', borderRadius: '5px', padding: '10px', backgroundColor: '#f9f9f9', height: '400px', overflowY: 'auto' }}
+      >
         {conversation.map((msg, index) => (
           <div key={index} style={{ marginBottom: '10px', textAlign: msg.role === 'user' ? 'right' : 'left' }}>
             <div style={{ display: 'inline-block', padding: '10px', borderRadius: '5px', backgroundColor: msg.role === 'user' ? '#007BFF' : '#e0e0e0', color: msg.role === 'user' ? '#fff' : '#000' }}>

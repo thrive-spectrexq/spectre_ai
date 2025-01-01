@@ -1,1 +1,11 @@
-# Spectre_ai ui
+# Spectre AI WebUI
+
+## Usage
+
+    ```
+    npm install
+    ```
+
+    ```
+    npm run dev
+    ```
