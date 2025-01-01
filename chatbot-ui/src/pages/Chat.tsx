@@ -25,7 +25,8 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
       const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
-      const result = await model.generateContent(message);
+      // Send the entire conversation history to the API
+      const result = await model.generateContent(conversation.map(msg => msg.content).join('\n'));
 
       // Add the AI's response to the conversation
       setConversation((prev) => [
