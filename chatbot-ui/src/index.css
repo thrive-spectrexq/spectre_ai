@@ -2,23 +2,83 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+h1, h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.user-msg, .bot-msg {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  display: inline-block;
+  max-width: 80%;
 }
 
 .user-msg {
-  color: blue;
-  margin: 5px 0;
+  background-color: #007BFF;
+  color: #fff;
+  text-align: right;
+  align-self: flex-end;
 }
 
 .bot-msg {
-  color: green;
-  margin: 5px 0;
+  background-color: #e0e0e0;
+  color: #333;
+  text-align: left;
+  align-self: flex-start;
 }
 
 input {
-  margin-right: 10px;
-  padding: 5px;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: calc(100% - 120px);
+  box-sizing: border-box;
 }
 
 button {
-  padding: 5px 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+  background-color: #007BFF;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+footer {
+  padding: 1rem;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }

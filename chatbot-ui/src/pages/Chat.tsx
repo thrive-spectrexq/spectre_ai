@@ -11,6 +11,7 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
     { role: string; content: string }[]
   >([{ role: 'ai', content: 'What can I help with?' }]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const sendMessage = async () => {
@@ -20,6 +21,7 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
     setConversation((prev) => [...prev, { role: 'user', content: message }]);
     setMessage('');
     setLoading(true);
+    setError(null);
 
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
@@ -35,6 +37,7 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
       ]);
     } catch (error) {
       console.error('Error communicating with the API:', error);
+      setError('Failed to get a response from the AI. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -51,6 +54,7 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
       <div
         ref={chatContainerRef}
         style={{ marginBottom: '20px', border: '1px solid #ccc', borderRadius: '5px', padding: '10px', backgroundColor: '#f9f9f9', height: '400px', overflowY: 'auto' }}
+        aria-live="polite"
       >
         {conversation.map((msg, index) => (
           <div key={index} style={{ marginBottom: '10px', textAlign: msg.role === 'user' ? 'right' : 'left' }}>
@@ -60,11 +64,14 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
           </div>
         ))}
       </div>
+      {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
       <input
         type="text"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         style={{ padding: '10px', fontSize: '1rem', width: '80%', marginRight: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+        disabled={loading}
+        aria-label="Type your message"
       />
       <button
         onClick={sendMessage}
