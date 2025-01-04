@@ -12,7 +12,7 @@ function App() {
     <Router>
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Navbar googleGeminiKey={googleGeminiKey} />
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, paddingBottom: '2rem' }}>
           <Routes>
             <Route path="/" element={<Home setApiKey={setGoogleGeminiKey} />} />
             <Route path="/chat" element={<Chat apiKey={googleGeminiKey} />} />
