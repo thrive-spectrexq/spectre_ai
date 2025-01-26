@@ -1,6 +1,8 @@
 import React from 'react';
 
 const Footer: React.FC = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer style={{ padding: '1rem', backgroundColor: '#333', color: '#fff', textAlign: 'center', width: '100%' }}>
       <div style={{ marginBottom: '0.5rem' }}>
@@ -11,7 +13,7 @@ const Footer: React.FC = () => {
           Terms of Service
         </a>
       </div>
-      <p>&copy; 2025 Spectre AI. All Rights Reserved.</p>
+      <p>&copy; {currentYear} Spectre AI. All Rights Reserved.</p>
     </footer>
   );
 };
