@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import React, { useEffect, useRef, useState } from 'react';
+import './Chat.css';
 
 interface ChatProps {
   apiKey: string;
@@ -50,36 +51,40 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
   }, [conversation]);
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', maxWidth: '600px', margin: '0 auto' }}>
+    <div className="chat-container">
       <div
         ref={chatContainerRef}
-        style={{ marginBottom: '20px', border: '1px solid #ccc', borderRadius: '5px', padding: '10px', backgroundColor: '#f9f9f9', height: '400px', overflowY: 'auto' }}
+        className="chat-box"
         aria-live="polite"
       >
         {conversation.map((msg, index) => (
-          <div key={index} style={{ marginBottom: '10px', textAlign: msg.role === 'user' ? 'right' : 'left' }}>
-            <div style={{ display: 'inline-block', padding: '10px', borderRadius: '5px', backgroundColor: msg.role === 'user' ? '#007BFF' : '#e0e0e0', color: msg.role === 'user' ? '#fff' : '#000' }}>
+          <div key={index} className={`chat-message ${msg.role}`}>
+            <div className="message-content">
               <strong>{msg.role === 'user' ? 'You' : 'AI'}:</strong> {msg.content}
             </div>
           </div>
         ))}
+        {loading && <div className="loading-indicator">AI is typing...</div>}
       </div>
-      {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
-      <input
-        type="text"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        style={{ padding: '10px', fontSize: '1rem', width: '80%', marginRight: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
-        disabled={loading}
-        aria-label="Type your message"
-      />
-      <button
-        onClick={sendMessage}
-        disabled={loading}
-        style={{ padding: '10px 20px', fontSize: '1rem', borderRadius: '5px', border: 'none', backgroundColor: '#007BFF', color: '#fff', cursor: 'pointer' }}
-      >
-        {loading ? 'Sending...' : 'Send'}
-      </button>
+      {error && <div className="error-message">{error}</div>}
+      <div className="input-container">
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          className="chat-input"
+          placeholder="Type your message..."
+          disabled={loading}
+          aria-label="Type your message"
+        />
+        <button
+          onClick={sendMessage}
+          disabled={loading}
+          className="send-button"
+        >
+          {loading ? 'Sending...' : 'Send'}
+        </button>
+      </div>
     </div>
   );
 };

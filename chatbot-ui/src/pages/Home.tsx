@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './Home.css';
 
 interface HomeProps {
   setApiKey: (key: string) => void;
@@ -28,21 +29,21 @@ const Home: React.FC<HomeProps> = ({ setApiKey }) => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', fontFamily: 'Arial, sans-serif' }}>
-      <h1 style={{ marginBottom: '2rem', fontSize: '2.5rem', color: '#333' }}>Spectre AI</h1>
-      <h2 style={{ marginBottom: '1rem', fontSize: '1.5rem', color: '#555' }}>Enter Your Google Gemini API Key</h2>
+    <div className="home-container">
+      <div className="logo-container">
+        <img src="/logo.png" alt="Spectre AI Logo" className="logo" />
+      </div>
+      <h1 className="title">Spectre AI</h1>
+      <h2 className="subtitle">Enter Your Google Gemini API Key</h2>
       <input
         type="password"
         onChange={handleChange}
         value={key}
-        style={{ padding: '10px', fontSize: '1rem', marginBottom: '1rem', width: '300px', borderRadius: '5px', border: '1px solid #ccc' }}
+        className="input"
         placeholder="API Key"
       />
-      {error && <div style={{ color: 'red', marginBottom: '1rem' }}>{error}</div>}
-      <button
-        onClick={handleSubmit}
-        style={{ padding: '10px 20px', fontSize: '1rem', borderRadius: '5px', border: 'none', backgroundColor: '#007BFF', color: '#fff', cursor: 'pointer' }}
-      >
+      {error && <div className="error">{error}</div>}
+      <button onClick={handleSubmit} className="submit-button">
         Submit
       </button>
       <ToastContainer />
