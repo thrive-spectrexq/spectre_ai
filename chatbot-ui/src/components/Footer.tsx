@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -6,12 +7,12 @@ const Footer: React.FC = () => {
   return (
     <footer style={{ padding: '1rem', backgroundColor: '#333', color: '#fff', textAlign: 'center', width: '100%' }}>
       <div style={{ marginBottom: '0.5rem' }}>
-        <a href="/privacy-policy" style={{ color: '#fff', textDecoration: 'none', margin: '0 0.5rem' }}>
+        <Link to="/privacy-policy" style={{ color: '#fff', textDecoration: 'none', margin: '0 0.5rem' }}>
           Privacy Policy
-        </a>
-        <a href="/terms-of-service" style={{ color: '#fff', textDecoration: 'none', margin: '0 0.5rem' }}>
+        </Link>
+        <Link to="/terms-of-service" style={{ color: '#fff', textDecoration: 'none', margin: '0 0.5rem' }}>
           Terms of Service
-        </a>
+        </Link>
       </div>
       <p>&copy; {currentYear} Spectre AI. All Rights Reserved.</p>
     </footer>
