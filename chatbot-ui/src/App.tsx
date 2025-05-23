@@ -4,6 +4,9 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Chat from './pages/Chat';
 import Home from './pages/Home';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+
 
 function App() {
   const [googleGeminiKey, setGoogleGeminiKey] = useState('');
@@ -16,6 +19,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home setApiKey={setGoogleGeminiKey} />} />
             <Route path="/chat" element={<Chat apiKey={googleGeminiKey} />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
           </Routes>
         </div>
         <Footer />
