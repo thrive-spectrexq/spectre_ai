@@ -15,17 +15,6 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
   const [error, setError] = useState<string | null>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
-  // Clear chat handler
-  const handleClearChat = () => {
-    setConversation([{ role: 'ai', content: 'What can I help with?' }]);
-    setError(null);
-  };
-
-  // Copy message handler
-  const handleCopy = (content: string) => {
-    navigator.clipboard.writeText(content);
-  };
-
   const sendMessage = async () => {
     if (!message.trim()) return;
 
@@ -63,11 +52,6 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
 
   return (
     <div className="chat-container">
-      <div className="chat-header" style={{ display: 'flex', justifyContent: 'flex-end', padding: '8px 16px' }}>
-        <button onClick={handleClearChat} className="clear-chat-btn">
-          Clear Chat
-        </button>
-      </div>
       <div
         ref={chatContainerRef}
         className="chat-box"
@@ -77,20 +61,6 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
           <div key={index} className={`chat-message ${msg.role}`}>
             <div className="message-content">
               <strong>{msg.role === 'user' ? 'You' : 'AI'}:</strong> {msg.content}
-              {msg.role === 'ai' && (
-                <button
-                  className="copy-btn"
-                  onClick={() => handleCopy(msg.content)}
-                  title="Copy to clipboard"
-                  style={{
-                    marginLeft: 8,
-                    background: 'transparent',
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontSize: '1rem'
-                  }}
-                >📋</button>
-              )}
             </div>
           </div>
         ))}
