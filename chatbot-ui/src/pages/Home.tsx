@@ -34,6 +34,9 @@ const Home: React.FC<HomeProps> = ({ setApiKey }) => {
         <img src="/logo.png" alt="Spectre AI Logo" className="logo" />
       </div>
       <h1 className="title">Spectre AI</h1>
+      <p className="description">
+        Your personal AI assistant powered by Google Gemini. Chat, ask questions, and get instant answers!
+      </p>
       <h2 className="subtitle">Enter Your Google Gemini API Key</h2>
       <input
         type="password"

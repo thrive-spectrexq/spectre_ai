@@ -1,53 +1,52 @@
-/* Chat.css */
-
 .chat-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
   font-family: Arial, sans-serif;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
   box-sizing: border-box;
 }
 
 .chat-box {
-  width: 100%;
-  height: 400px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  background-color: #f9f9f9;
+  flex: 1 1 auto;
   overflow-y: auto;
-  margin-bottom: 20px;
+  padding: 24px 0 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  background-color: #f9f9f9;
 }
 
 .chat-message {
-  margin-bottom: 10px;
   display: flex;
-  align-items: center;
+  justify-content: flex-start;
+  padding: 0 16px;
 }
 
 .chat-message.user .message-content {
   background-color: #007BFF;
   color: #fff;
-  text-align: right;
   align-self: flex-end;
+  margin-left: auto;
 }
 
 .chat-message.ai .message-content {
   background-color: #e0e0e0;
   color: #333;
-  text-align: left;
   align-self: flex-start;
+  margin-right: auto;
 }
 
 .message-content {
-  padding: 10px;
-  border-radius: 5px;
-  max-width: 80%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  max-width: 70vw;
+  word-break: break-word;
+  font-size: 1rem;
 }
 
 .loading-indicator {
@@ -58,27 +57,35 @@
 
 .error-message {
   color: red;
-  margin-bottom: 10px;
+  margin: 8px 0;
+  text-align: center;
 }
 
 .input-container {
   display: flex;
+  padding: 16px;
+  background: #fff;
+  border-top: 1px solid #eee;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .chat-input {
-  padding: 10px;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
   flex: 1;
-  margin-right: 10px;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-right: 12px;
 }
 
 .send-button {
-  padding: 10px 20px;
+  padding: 12px 24px;
   font-size: 1rem;
-  border-radius: 5px;
+  border-radius: 6px;
   border: none;
   background-color: #007BFF;
   color: #fff;
@@ -91,26 +98,20 @@
 }
 
 @media (max-width: 600px) {
-  .chat-box {
-    height: 300px;
+  .chat-container {
+    height: 100dvh;
   }
-
   .message-content {
-    max-width: 100%;
+    max-width: 90vw;
+    font-size: 0.95rem;
   }
-
   .input-container {
     flex-direction: column;
+    gap: 8px;
+    padding: 8px;
   }
-
   .chat-input {
     margin-right: 0;
-    margin-bottom: 10px;
-    width: 100%;
-  }
-
-  .send-button {
-    width: 100%;
-    padding: 10px;
+    margin-bottom: 8px;
   }
 }

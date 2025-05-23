@@ -49,6 +49,14 @@
   animation: slideIn 1s ease-in-out;
 }
 
+.description {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  color: #444;
+  text-align: center;
+  animation: slideIn 1s ease-in-out;
+}
+
 .subtitle {
   margin-bottom: 1rem;
   font-size: 1.5rem;
@@ -95,6 +103,11 @@
 
   .subtitle {
     font-size: 1.2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+    margin-bottom: 1rem;
   }
 
   .input {

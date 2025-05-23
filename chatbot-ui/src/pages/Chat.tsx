@@ -26,7 +26,7 @@ const Chat: React.FC<ChatProps> = ({ apiKey }) => {
 
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
       // Send only the latest message to the API
       const result = await model.generateContent(message);
